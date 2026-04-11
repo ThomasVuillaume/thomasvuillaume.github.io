@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const sectionTitle = lang === 'fr' ? 'Dernières publications' : 'Latest';
+const label = lang === 'fr' ? 'Publications récentes' : 'Latest posts';
+
+const allPubs = await getCollection('publications');
+const pubs = allPubs
+  .filter((p) => p.data.lang === 'both' || p.data.lang === lang)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+function getTitle(entry: any): string {
+  if (lang === 'en' && entry.data.titleEn) return entry.data.titleEn;
+  return entry.data.title;
+}
+
+function getVenue(entry: any): string {
+  if (lang === 'en' && entry.data.venueEn) return entry.data.venueEn;
+  return entry.data.venue;
+}
+
+function formatDate(date: string): string {
+  const [year, month] = date.split('-');
+  if (lang === 'fr') {
+    const months: Record<string, string> = {
+      '01': 'janv.', '02': 'fév.', '03': 'mars', '04': 'avr.',
+      '05': 'mai', '06': 'juin', '07': 'juil.', '08': 'août',
+      '09': 'sept.', '10': 'oct.', '11': 'nov.', '12': 'déc.',
+    };
+    return `${months[month]} ${year}`;
+  }
+  const months: Record<string, string> = {
+    '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr',
+    '05': 'May', '06': 'Jun', '07': 'Jul', '08': 'Aug',
+    '09': 'Sep', '10': 'Oct', '11': 'Nov', '12': 'Dec',
+  };
+  return `${months[month]} ${year}`;
+}
+---
+
+{pubs.length > 0 && (
+  <section class="section" aria-label={label}>
+    <h2 class="section-title">{sectionTitle}</h2>
+    <ul class="latest">
+      {pubs.map((pub) => (
+        <li>
+          <span class="latest-title">
+            {pub.data.url
+              ? <a href={pub.data.url} target="_blank" rel="noopener">{getTitle(pub)}</a>
+              : <a href="#">{getTitle(pub)}</a>
+            }
+          </span>
+          <span class="latest-meta">
+            <span class="latest-date">{formatDate(pub.data.date)}</span> · {getVenue(pub)}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

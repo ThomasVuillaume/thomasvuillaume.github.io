@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Bio from '../../components/Bio.astro';
+import Contributions from '../../components/Contributions.astro';
+import Publications from '../../components/Publications.astro';
+import CurrentReads from '../../components/CurrentReads.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+---
+
+<BaseLayout
+  lang={lang}
+  title="Thomas Vuillaume — Director of Strategy & Engineering"
+  description="Director of Strategy & Engineering at SOLENT. Ten years building and scaling teams and critical infrastructure across aerospace, energy, and telecoms."
+  canonicalPath="/en/"
+>
+  <main class="container" id="main-content">
+    <Header lang={lang} />
+    <Bio lang={lang} />
+    <Contributions lang={lang} />
+    <Publications lang={lang} />
+    <CurrentReads lang={lang} />
+    <Footer lang={lang} />
+  </main>
+</BaseLayout>

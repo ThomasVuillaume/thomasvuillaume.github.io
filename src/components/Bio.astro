@@ -1,0 +1,28 @@
+---
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const label = lang === 'fr' ? 'Présentation' : 'About';
+
+const paragraphs = lang === 'fr'
+  ? [
+      "Architecte d’organisations tech et de systèmes numériques critiques, du logiciel embarqué jusqu’au cloud. Une expertise hybride : cybersécurité, cloud et IA.",
+      "Dix ans à faire grandir des équipes et des infrastructures critiques dans les secteurs de l'aéronautique, de l'énergie et des télécoms.",
+    ]
+  : [
+      "Architect of tech organizations and mission-critical systems, from embedded software to cloud. A hybrid expertise: cybersecurity, cloud, and AI.",
+      "Ten years building and scaling teams and critical infrastructure across aerospace, energy, and telecoms.",
+    ];
+
+const quote = lang === 'fr'
+  ? "Structurer l'offre, choisir l'architecture, monter l'équipe, délivrer le résultat : c'est le même métier."
+  : "Shape the bid, choose the architecture, build the team, deliver the result: it's all one job.";
+---
+
+<section id="page-content" class="bio" aria-label={label} tabindex="-1">
+  {paragraphs.map((p) => <p>{p}</p>)}
+  <p class="conviction">"{quote}"</p>
+</section>

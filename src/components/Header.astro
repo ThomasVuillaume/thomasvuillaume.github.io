@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const title = lang === 'fr'
+  ? 'Directeur Stratégie & Technique'
+  : 'Director of Strategy & Engineering';
+
+const skipText = lang === 'fr' ? 'Aller au contenu' : 'Skip to content';
+const langLabel = lang === 'fr' ? 'Langue' : 'Language';
+---
+
+<a class="skip-link" href="#page-content">{skipText}</a>
+
+<header class="header">
+  <Image
+    class="header-photo"
+    src="/TVU.webp"
+    alt="Thomas Vuillaume"
+    width={88}
+    height={88}
+    loading="eager"
+  />
+  <div class="header-info">
+    <h1>Thomas Vuillaume</h1>
+    <p class="title">
+      {title}
+      @ <a href="https://www.solent.fr" target="_blank" rel="noopener">SOLENT</a>
+    </p>
+  </div>
+  <nav class="lang-toggle" aria-label={langLabel}>
+    <a href="/" {...(lang === 'fr' ? { 'aria-current': 'page' } : {})}>FR</a>
+    <a href="/en/" {...(lang === 'en' ? { 'aria-current': 'page' } : {})}>EN</a>
+  </nav>
+</header>

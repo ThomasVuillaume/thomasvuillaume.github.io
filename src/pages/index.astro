@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Bio from '../components/Bio.astro';
+import Contributions from '../components/Contributions.astro';
+import Publications from '../components/Publications.astro';
+import CurrentReads from '../components/CurrentReads.astro';
+import Footer from '../components/Footer.astro';
+
+const lang = 'fr';
+---
+
+<BaseLayout
+  lang={lang}
+  title="Thomas Vuillaume — Directeur Stratégie & Technique"
+  description="Directeur Stratégie @ SOLENT. Dix ans à faire grandir des équipes et des infrastructures critiques dans les secteurs de l'aéronautique, de l'énergie et des télécoms."
+  canonicalPath="/"
+>
+  <main class="container" id="main-content">
+    <Header lang={lang} />
+    <Bio lang={lang} />
+    <Contributions lang={lang} />
+    <Publications lang={lang} />
+    <CurrentReads lang={lang} />
+    <Footer lang={lang} />
+  </main>
+</BaseLayout>

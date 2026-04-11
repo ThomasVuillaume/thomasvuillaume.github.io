@@ -1,0 +1,22 @@
+{
+  "name": "cv-tvu-next",
+  "version": "1.0.0",
+  "description": "Site personnel de Thomas Vuillaume — thomasvuillaume.fr",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasVuillaume/cv-tvu-next.git"
+  },
+  "author": "Thomas Vuillaume",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "astro": "^6.1.5",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const sectionTitle = lang === 'fr' ? 'Lectures en cours' : 'Currently reading';
+const label = lang === 'fr' ? 'Lectures en cours' : 'Currently reading';
+
+const allReads = await getCollection('reads');
+const reads = allReads
+  .filter((r) => r.data.lang === 'both' || r.data.lang === lang)
+  .filter((r) => r.data.status === 'reading');
+
+function getSource(entry: any): string {
+  if (lang === 'en' && entry.data.sourceEn) return entry.data.sourceEn;
+  return entry.data.source || '';
+}
+---
+
+{reads.length > 0 && (
+  <section class="section" aria-label={label}>
+    <h2 class="section-title">{sectionTitle}</h2>
+    <ul class="reading">
+      {reads.map((read) => (
+        <li>
+          <span class="reading-title">
+            {read.data.url
+              ? <><a href={read.data.url} target="_blank" rel="noopener">{read.data.title}</a> — {read.data.author}</>
+              : <><a href="#">{read.data.title}</a> — {read.data.author}</>
+            }
+          </span>
+          {getSource(read) && <span class="reading-source">{getSource(read)}</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

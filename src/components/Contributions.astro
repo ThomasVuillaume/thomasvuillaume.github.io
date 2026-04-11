@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const labels = {
+  fr: { strategy: '— Stratégie & Organisation', code: '— IA & Code' },
+  en: { strategy: '— Strategy & Organisation', code: '— AI & Code' },
+};
+
+const all = await getCollection('contributions');
+const sorted = all.sort((a, b) => a.data.order - b.data.order);
+const strategyItems = sorted.filter((e) => e.data.group === 'strategy');
+const codeItems = sorted.filter((e) => e.data.group === 'code');
+
+function getText(entry: any): string {
+  return lang === 'en' ? entry.data.textEn : entry.data.text;
+}
+---
+
+<section class="section contributions" aria-label="Contributions">
+  {[
+    { label: labels[lang].strategy, items: strategyItems },
+    { label: labels[lang].code, items: codeItems },
+  ].map(({ label, items }) => (
+    <div class="contributions-group">
+      <p class="contributions-label">{label}</p>
+      <ul class="contributions-list">
+        {items.map((entry) => (
+          <li class="contributions-item">
+            <span class="contributions-text">
+              {getText(entry)}
+              {entry.data.url && (
+                <> · <a href={entry.data.url} target="_blank" rel="noopener">{entry.data.urlText}</a></>
+              )}
+            </span>
+            <span class="contributions-year">{entry.data.year}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</section>
