@@ -1,9 +1,9 @@
 ---
-title: "Kubernetes the Harder Way"
-author: "Roman Janusz (@ghik)"
+title: "Introduction to Model Context Protocol"
+author: "Anthropic (skilljar)"
 status: "reading"
 lang: "both"
-source: "repository"
-sourceEn: "repository"
-url: "https://github.com/ghik/kubernetes-the-harder-way"
+source: "MOOC"
+sourceEn: "MOOC"
+url: "https://anthropic.skilljar.com/introduction-to-model-context-protocol"
 ---
